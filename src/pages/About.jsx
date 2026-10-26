@@ -66,7 +66,10 @@ export default function About() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl mb-4">Visit Us</h2>
           <p className="text-[#f5f1ea]/70 mb-8">
-            No 12 St. John Street, Taiwo off Tinubu Square, CMS, Lagos Island.
+            Head Office: No. 3, Saint John Street, Tinubu Square, Lagos Island.
+            <br />
+            Branches: Block J, First Floor, Shop 36, and United Plaza, GF 39/40,
+            Nnamdi Azikiwe Street, Tinubu Square, Lagos.
           </p>
           <button
             onClick={() => openWhatsApp()}

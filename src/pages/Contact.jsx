@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { openWhatsApp } from "../utils/whatsapp";
+import { openWhatsApp, WHATSAPP_NUMBER } from "../utils/whatsapp";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", message: "" });
@@ -35,7 +35,7 @@ export default function Contact() {
                   onClick={() => openWhatsApp()}
                   className="text-lg text-[#1a1a1a] hover:text-[#c9a227] transition"
                 >
-                  0913 206 6508
+                  +{WHATSAPP_NUMBER}
                 </button>
               </div>
 
@@ -48,13 +48,21 @@ export default function Contact() {
 
               <div>
                 <p className="text-xs tracking-widest uppercase text-[#c9a227] mb-1">
-                  Location
+                  Head Office
                 </p>
                 <p className="text-[#1a1a1a]">
-                  No 12 St. John Street,<br />
-                  Taiwo off Tinubu Square,<br />
-                  CMS, Lagos Island
+                  No. 3, Saint John Street, Tinubu Square, Lagos Island.
                 </p>
+              </div>
+
+              <div>
+                <p className="text-xs tracking-widest uppercase text-[#c9a227] mb-1">
+                  Branch Offices
+                </p>
+                <ul className="space-y-3 text-[#1a1a1a]">
+                  <li>Block J, First Floor, Shop 36, Namdi Azikiwe Street, Tinubu Square, Lagos.</li>
+                  <li>United Plaza, GF 39/40, Nnamdi Azikiwe Street, Tinubu Square, Lagos.</li>
+                </ul>
               </div>
             </div>
 

@@ -76,7 +76,10 @@ export default function FabricDetails() {
           </div>
 
           <p className="text-sm text-[#1a1a1a]/50 mt-6">
-            Visit us: No 12 St. John Street, Taiwo off Tinubu Square, CMS, Lagos Island.
+            Head Office: No. 3, Saint John Street, Tinubu Square, Lagos Island.
+            <br />
+            Branches: Block J, First Floor, Shop 36, and United Plaza, GF 39/40,
+            Nnamdi Azikiwe Street, Tinubu Square, Lagos.
           </p>
         </div>
       </section>

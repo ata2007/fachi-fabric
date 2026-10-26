@@ -6,16 +6,21 @@ import { categories, fabrics } from "../data/fabrics";
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category") ?? "all";
-  const visibleFabrics = selectedCategory === "all"
-    ? fabrics
-    : fabrics.filter((fabric) => fabric.category === selectedCategory);
+  const searchQuery = (searchParams.get("search") ?? "").trim();
+  const normalizedQuery = searchQuery.toLowerCase();
+  const visibleFabrics = fabrics.filter((fabric) => {
+    const matchesCategory = selectedCategory === "all" || fabric.category === selectedCategory;
+    const searchableText = `${fabric.name} ${fabric.category} ${fabric.description}`.toLowerCase();
+    return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
+  });
 
   function selectCategory(category) {
-    if (category === "all") {
-      setSearchParams({});
-      return;
-    }
-    setSearchParams({ category });
+    setSearchParams((currentParams) => {
+      const updatedParams = new URLSearchParams(currentParams);
+      if (category === "all") updatedParams.delete("category");
+      else updatedParams.set("category", category);
+      return updatedParams;
+    });
   }
 
   return (
@@ -58,7 +63,7 @@ export default function Shop() {
             </div>
           ) : (
             <p className="py-20 text-center text-[#1a1a1a]/60">
-              No fabrics found in this collection.
+              {searchQuery ? `No fabrics found for “${searchQuery}”.` : "No fabrics found in this collection."}
             </p>
           )}
         </div>
