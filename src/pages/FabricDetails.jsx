@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fabrics } from "../data/fabrics";
-import { orderOnWhatsApp, openWhatsApp } from "../utils/whatsapp";
+import { orderOnWhatsApp, openWhatsApp, NUMBERS } from "../utils/whatsapp";
 
 export default function FabricDetails() {
   const { id } = useParams();
+  const [selectedNumber, setSelectedNumber] = useState(NUMBERS.boss);
   const fabric = fabrics.find((f) => f.id === Number(id));
 
   if (!fabric) {
@@ -58,16 +60,48 @@ export default function FabricDetails() {
             {fabric.description}
           </p>
 
+          <fieldset className="mb-6 rounded-lg border border-[#1a1a1a]/10 bg-white p-4">
+            <legend className="px-1 text-xs font-bold uppercase tracking-widest text-[#1a1a1a]/60">
+              Choose who to message
+            </legend>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                aria-pressed={selectedNumber === NUMBERS.boss}
+                onClick={() => setSelectedNumber(NUMBERS.boss)}
+                className={`rounded-md border px-3 py-3 text-sm font-bold transition-colors ${
+                  selectedNumber === NUMBERS.boss
+                    ? "border-[#062045] bg-[#062045] text-[#f5f1ea]"
+                    : "border-[#062045]/20 text-[#062045] hover:border-[#062045]"
+                }`}
+              >
+                Contact Boss
+              </button>
+              <button
+                type="button"
+                aria-pressed={selectedNumber === NUMBERS.worker}
+                onClick={() => setSelectedNumber(NUMBERS.worker)}
+                className={`rounded-md border px-3 py-3 text-sm font-bold transition-colors ${
+                  selectedNumber === NUMBERS.worker
+                    ? "border-[#062045] bg-[#062045] text-[#f5f1ea]"
+                    : "border-[#062045]/20 text-[#062045] hover:border-[#062045]"
+                }`}
+              >
+                Contact Worker
+              </button>
+            </div>
+          </fieldset>
+
           <div className="flex flex-col sm:flex-row gap-3">
             <button
-              onClick={() => orderOnWhatsApp(fabric.name, fabric.price)}
+              onClick={() => orderOnWhatsApp(fabric.name, fabric.price, selectedNumber)}
               className="bg-[#25D366] hover:bg-[#1ebe5a] text-white font-medium px-8 py-3 rounded-full transition"
             >
               Order on WhatsApp
             </button>
             <button
               onClick={() =>
-                openWhatsApp(`Hi Fachi Fabric Ventures, I have a question about *${fabric.name}*.`)
+                openWhatsApp(`Hi Fachi Fabric Ventures, I have a question about *${fabric.name}*.`, selectedNumber)
               }
               className="border border-[#062045] text-[#062045] hover:bg-[#062045] hover:text-[#c9a227] font-medium px-8 py-3 rounded-full transition"
             >
